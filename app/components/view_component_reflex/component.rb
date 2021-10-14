@@ -168,8 +168,9 @@ module ViewComponentReflex
           method = action
           action = "click"
         end
+        "#{action}->#{self.class.name}##{method}"
       end.join(' ')
-      
+
       {
         reflex: reflexes,
         key: key
