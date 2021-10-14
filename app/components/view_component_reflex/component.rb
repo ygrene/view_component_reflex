@@ -162,14 +162,16 @@ module ViewComponentReflex
 
     # Helper to use to create the proper reflex data attributes for an element
     def reflex_data_attributes(reflex)
-      action, method = reflex.to_s.split("->")
-      if method.nil?
-        method = action
-        action = "click"
-      end
-
+      reflexes = reflex.to_s.split(' ').map do |reflex|
+        action, method = reflex.split("->")
+        if method.nil?
+          method = action
+          action = "click"
+        end
+      end.join(' ')
+      
       {
-        reflex: "#{action}->#{self.class.name}##{method}",
+        reflex: reflexes,
         key: key
       }
     end
